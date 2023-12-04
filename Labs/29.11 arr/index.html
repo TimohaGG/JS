@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Створіть масив із 10 випадкових чисел і напишіть кілька
+        // функцій для роботи з ним.
+
+        let arr = [];
+        for(i=0;i<10;i++){
+            arr.push(Math.round(Math.random()* (100-1)+1));
+        }
+        // 1. Функція приймає масив і виводить його на екран.
+        function Print(arr){
+            console.log(arr);
+        }
+        Print(arr);
+        // 2. Функція приймає масив і виводить лише парні елементи.
+        function PrintEven(arr){
+            for(i=0;i<arr.length;i++){
+                if(arr[i]%2==0)
+                    console.log(arr[i]);
+            }
+        }
+        //PrintEven(arr);
+        // 3. Функція приймає масив і повертає суму всіх елементів
+        // масиву.
+        function Sum(arr){
+            let res = arr[0];
+            for(i=1;i<arr.length;i++){
+                res+=arr[i];
+            }
+            return res;
+        }
+        //console.log(Sum(arr));
+        // 4. Функція приймає масив і повертає його максимальний
+        // елемент.
+        function Max(arr){
+            let max = arr[0];
+            for(i=1;i<arr.length;i++){
+                if(arr[i]>max)
+                    max = arr[i];
+            }
+            return max;
+        }
+       // console.log(Max(arr));
+        // 5. Функція додавання нового елемента в масив за вказаним
+        // індексом.
+        function Insert(arr, num, index){
+            //arr.splice(index,0,num);
+            
+            let newArr = [];
+            for(i = 0;i<arr.length+1;i++){
+                if(i<index)
+                    newArr.push(arr[i]);
+                else if(i===index)
+                    newArr.push(num);
+                else 
+                    newArr.push(arr[i-1]);
+            }
+            
+           return newArr;
+          
+           
+        }
+        //arr = Insert(arr,10000,1);
+        //Print(arr);
+        // 6. Функція видалення елемента з масиву за вказаним індексом.
+        function Remove(arr,index){
+            let newArr = [];
+            for(i=0;i<arr.length;i++){
+                if(i===index)
+                    continue;
+                newArr.push(arr[i]);
+            }
+            return newArr;
+        }
+        arr=Remove(arr,2);
+        Print(arr);
+    </script>
+</body>
+</html>
