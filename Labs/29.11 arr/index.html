@@ -18,7 +18,7 @@
         function Print(arr){
             console.log(arr);
         }
-        Print(arr);
+        //Print(arr);
         // 2. Функція приймає масив і виводить лише парні елементи.
         function PrintEven(arr){
             for(i=0;i<arr.length;i++){
@@ -79,8 +79,112 @@
             }
             return newArr;
         }
-        arr=Remove(arr,2);
-        Print(arr);
+        // arr=Remove(arr,2);
+        // Print(arr);
+
+        //Створіть ще один масив із 5 випадкових чисел і написати на- 
+        // ступні функції.
+     
+        function randomArr(size){
+            let arrTmp = [];
+            for(let i =0;i<size;i++){
+                arrTmp.push(Math.floor(Math.random() * (100-1)+1));
+            }
+            return arrTmp;
+        }
+           
+        
+
+        // let arr2 = randomArr(5);
+        // let arr3 = randomArr(5);
+
+         let arr2 = [1,2,3,4,5];
+        let arr3 = [3,4,5,6,7];
+        // 1.    Функція приймає 2 масиви і повертає новий масив, в яко- 
+        // му зібрані всі елементи двох масивів без повторень.
+        function Merge(arr1, arr2){
+            let newArr = [];
+            for(el of arr1){
+                if(!newArr.includes(el))
+                    newArr.push(el);
+            }
+
+            for(el of arr2){
+                if(!newArr.includes(el))
+                    newArr.push(el);
+            }
+
+            return newArr;
+        }
+
+        console.log(arr2);
+        console.log(arr3);
+        // let finalArr = Merge(arr2,arr3);
+        // console.log(finalArr);
+       
+
+         // 2. Функція приймає 2 масиви і повертає новий масив, у яко- 
+        // му зібрані загальні елементи (тобто елементи, які трапля- 
+        // ються у першому та другому масивах) без повторень.
+        function Intersec(arr1, arr2){
+            let newArr = [];
+            for(el of arr1){
+                if(arr2.includes(el))
+                    newArr.push(el);
+            }
+
+            return newArr;
+        }
+        
+
+         // 3. Функція приймає 2 масиви і повертає новий масив, в яко- 
+        // му зібрані всі елементи з першого масиву, яких немає у 
+        // другому масиві.
+        function Join(arr1, arr2){
+            let newArr = [];
+            for(el of arr1){
+                if(!arr2.includes(el))
+                    newArr.push(el);
+            }
+
+            return newArr;
+        }
+        console.log(Join(arr2,arr3));
+
+
+        // Створіть масив фруктів та відсортуйте його за алфавітом. 
+        // Напишіть наступні функції.
+      
+       
+
+        let fruits = ["banana","apple","orange","papaya","watermalon","malon","pear"];
+
+        function compare(a,b){
+            return a.localeCompare(b);
+        }
+
+        function Sort(){
+            fruits.sort(compare);
+        }
+        // 1.    Виведення на екран за допомогою document.write() у 
+        // вигляді списку (за допомогою тегів ul і li).
+        function Print(){
+            let str = fruits.map(x=>`<li>${x}</li>`).reduce((x,y)=>{return x+y;});
+            str = `<ul>${str}</ul>`;
+            document.write(str);
+        }
+        Sort();
+        Print();
+
+         // 2. Пошук фрукта в масиві. Функція приймає назву фрукта і 
+        // повертає індекс знайденого елемента або -1, якщо не знай- 
+        // дено. Пошук повинен бути нерегістрозалежний.
+
+        function Find(fruits,toFind){
+            return fruits.findIndex(item => item.toLowerCase() === toFind.toLowerCase());
+        }
+
+        console.log(Find(fruits,"watermaloN"));
     </script>
 </body>
 </html>
