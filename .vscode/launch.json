@@ -9,7 +9,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "D:\\УНИВЕР\\3_курс\\JS\\Labs\\29.11 arr\\index.html",
+            "url": "D:\\УНИВЕР\\3_курс\\JS\\HWs\\29.11 str\\index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]

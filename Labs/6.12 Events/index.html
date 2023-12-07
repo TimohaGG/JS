@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #gun{
+            top:50px;
+            width: 50px;
+            height: 20px;
+            background-color: black;
+            border-radius: 10%;
+            position: absolute;
+        }
+        #bullet{
+            top:50px;
+            left: 60px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: yellow;
+            position: absolute;
+            border: 2px solid black;
+        }
+        #target{
+            top:50px;
+            left: 300px;
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            position: absolute;
+        }
+
+        body{
+            position: relative;
+        }
+    </style>
+</head>
+<body onkeypress="buttPress(event)">
+   <h1>Press space</h1>
+  
+    <div id="gun"></div>
+    <div id="bullet"></div>
+    <div id="target"> </div>
+   <script>
+
+        var onFly = false;
+        var position = 30;
+        let bullet = document.getElementById("bullet");
+        function moveBullet(){       
+            if(onFly){
+                position+=5;
+            }
+            if(position>=200){
+                onFly = false;
+                position = 30;
+            }
+            else{
+                setTimeout(moveBullet,1000);
+                bullet.style.left = `${position}px`;
+            }
+        }
+
+        function buttPress(e){
+            console.log(e);
+            if(e.code==="Space"&&!onFly){
+                onFly = true;
+                moveBullet();
+            }
+        }
+   </script>
+</body>
+</html>
