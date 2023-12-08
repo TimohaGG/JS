@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+            background-color: #597ba0;
+            padding-top:30px;
+        }
+
+        li {
+            width: 100px;
+            text-align: left;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            background-color: #597ba0;
+            color: white;
+        }
+
+        li:hover,.selected {
+            background-color: #4873a1;
+        }
+
+        .tabs{
+            display: flex;
+            width: 1000px;
+            border: 3px solid #4873a1;
+        }
+
+        #text,#text>p{
+            padding:10px;
+        }
+    </style>
+  </head>
+  <body>
+    
+    <div class="tabs">
+        <ul id="menu">
+          <li class="selected" id="HTML">HTML</li>
+          <li id="CSS">CSS</li>
+          <li id="JS">JS</li>
+        </ul>
+        <div id="text">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit et eos
+            eligendi quos beatae ducimus perferendis ipsum magni aliquam rem libero
+            ad labore error temporibus accusantium nihil amet similique nesciunt eum
+            consequatur, deserunt itaque. Eos magni dolorum dignissimos! Libero
+            explicabo dolor quam ex recusandae fugit error omnis aliquid reiciendis,
+            non laborum ea saepe, repellat corrupti. Quos veniam facere
+            voluptatibus? Quo deleniti nobis necessitatibus, est laboriosam quaerat
+            error recusandae eum, maiores explicabo, laborum iusto. Aliquid corrupti
+            sunt illo repudiandae? Repellat ullam delectus esse pariatur, quo
+            nesciunt sapiente ipsam velit cum id, porro dolorem ut unde? Dolorem
+            quis expedita id fugiat fugit.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit et eos
+            eligendi quos beatae ducimus perferendis ipsum magni aliquam rem libero
+            ad labore error temporibus accusantium nihil amet similique nesciunt eum
+            consequatur, deserunt itaque. Eos magni dolorum dignissimos! Libero
+            explicabo dolor quam ex recusandae fugit error omnis aliquid reiciendis,
+            non laborum ea saepe, repellat corrupti. Quos veniam facere
+            voluptatibus? Quo deleniti nobis necessitatibus, est laboriosam quaerat
+            error recusandae eum, maiores explicabo, laborum iusto. Aliquid corrupti
+            sunt illo repudiandae? Repellat ullam delectus esse pariatur, quo
+            nesciunt sapiente ipsam velit cum id, porro dolorem ut unde? Dolorem
+            quis expedita id fugiat fugit.
+          </p>
+          
+        </div>
+    </div>
+    <script src="scripts/articles.js"></script>
+  </body>
+</html>

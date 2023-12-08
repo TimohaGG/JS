@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        div{
+            position: absolute;
+            top:0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(191, 225, 255);
+        }
+    </style>
+</head>
+<body>
+    <div onmousemove="showCoords(event)" onmousedown="showPressed(event)">
+        <span>X = <span id="xCoord"></span>, Y = <span id="yCoord"></span></span><br>
+        <span>Clicked with: <span id="clickedText"></span> </span>
+    </div>
+    <script>
+        function showCoords(e){
+            let X = document.getElementById("xCoord");
+            X.innerText = e.clientX;
+            let Y = document.getElementById("yCoord");
+            Y.innerText = e.clientY;
+        }
+
+        function showPressed(e){
+            let text = '';
+            switch(e.button){
+                case 1:{text="Middle mouse"}break;
+                case 0:{text="Left mouse"}break;
+                case 2:{text="Right mouse"}break;
+            }
+
+            let textField = document.getElementById("clickedText");
+            textField.innerText = text;
+        }
+    </script>
+</body>
+</html>

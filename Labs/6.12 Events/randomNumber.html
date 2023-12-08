@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .wrap{
+            width: 300px;
+            background-color: aliceblue;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .wrap p{
+            margin: 10px;
+        }
+
+        #number{
+            font-size: 30px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .wrap button{
+            padding: 5px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+        <p>Random number</p>
+        <h3 id="number">12</h3>
+        <button id="button" onclick="generateNumber()">Generate random number</button>
+    </div>
+
+    <script src="scripts/script.js">
+
+
+      
+    </script>
+</body>
+</html>

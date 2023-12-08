@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="width: 500px;">
+        <button id="hideButton">Hide / show text</button>
+        <p id="text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore,
+          necessitatibus cum. Adipisci, ratione possimus neque nobis aspernatur
+          facere architecto enim dolor natus ea quidem corrupti cupiditate obcaecati
+          quibusdam nemo sequi unde. Sint mollitia ipsum soluta in. Minima
+          asperiores velit repellat, porro fugit repudiandae repellendus voluptas
+          nisi mollitia id dolorem laborum aliquam incidunt natus dolorum odio
+          voluptatum facere? Ad debitis saepe, officia delectus mollitia quaerat
+          repellat eveniet reprehenderit ipsum enim, veritatis maiores ipsam quasi
+          eius illum omnis id cupiditate voluptates sed? Suscipit voluptas quo vel
+          voluptate rerum libero dolore eveniet, omnis dolor numquam accusantium
+          incidunt cum deleniti sunt quaerat, recusandae fugit.
+        </p>
+    </div>
+   
+    <script>
+        let button = document.getElementById("hideButton");
+        button.addEventListener("click",collapseText);
+
+        function collapseText(){
+            let text = document.getElementById("text");
+            text.style.display = text.style.display === "none" ? "block" : "none";
+            
+        }
+
+    </script>
+  </body>
+</html>
