@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        form{
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        form div{
+            display: flex;
+            border: 1px solid black;
+            align-items: center;
+            
+        }
+
+        form div label span{
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        form div label{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        input{
+           
+            width: 50px;
+            
+            box-sizing: border-box;
+        }
+
+        form button{
+            width: 100%;
+        }
+
+        .colors{
+            margin: 0 auto;
+            width: 800px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:space-around;
+            align-items:center;
+        }
+
+        .color{
+            display: flex;
+            align-items: center;
+            border: 1px solid black;
+            width: fit-content;
+            margin: 10px;
+        }
+
+        .rectangle{
+            width: 30px;
+            height: 30px;
+            
+            
+        }
+
+        .color span{
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <form>
+        <div>
+            <label><span>R</span>
+                <input type="number" max="255" min="0" name="R">
+            </label>
+            <label><span>G</span>
+                <input type="number" max="255" min="0" name="G">
+            </label>
+            <label><span>B</span>
+                <input type="number" max="255" min="0" name="B">
+            </label>
+        </div>
+       
+        <button onclick="addColor(event)">Add color</button>
+    </form>
+
+    <div class="colors">
+        <div class="color">
+            <div class="rectangle" style="background-color: rgb(141, 32, 12);"></div>
+            <span>RGB(141, 32, 12)</span>
+        </div>
+        <div class="color">
+            <div class="rectangle" style="background-color: rgb(12, 123, 12);"></div>
+            <span>RGB(12, 123, 12)</span>
+        </div>
+        <div class="color">
+            <div class="rectangle" style="background-color: rgb(55, 12, 22);"></div>
+            <span>RGB(55, 12, 22)</span>
+        </div>
+        <div class="color">
+            <div class="rectangle" style="background-color: rgb(1, 123, 244);"></div>
+            <span>RGB(1, 123, 244)</span>
+        </div>
+    </div>
+
+    <script>
+        function getColorString(r,g,b){
+            return `RGB(${r},${g},${b})`;
+        }
+
+        function addColor(e){
+            e.preventDefault();
+            let colors = document.getElementsByClassName("colors")[0];
+
+            let newColor = document.createElement("div");
+            newColor.classList.add("color");
+
+            let formElems = document.forms[0].elements;
+            let colorsList = [];
+            
+           
+            for(let i =0;i<formElems.length;i++){
+                if(formElems[i].type==="number")
+                    colorsList.push(formElems[i].value === '' ? 0 : formElems[i].value); 
+            }
+            let colorRec = document.createElement("div");
+            colorRec.classList.add("rectangle");
+            colorRec.style = `background-color:rgb(${colorsList[0]},${colorsList[1]},${colorsList[2]})`;
+        
+            newColor.appendChild(colorRec);
+
+            let text = getColorString(colorsList[0],colorsList[1],colorsList[2]);
+            let spanText  = document.createElement("span");
+            spanText.innerText = text;
+
+            newColor.appendChild(spanText);
+
+            colors.appendChild(newColor);
+        }
+
+    </script>
+
+</body>
+</html>

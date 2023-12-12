@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        form{
+            display: flex;
+            width: fit-content;
+            flex-direction: column;
+            font-weight:500;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        form button{
+            border-radius: 5px;
+            border:1px solid black;
+            height: 30px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .formElement{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 500px;
+        }
+
+
+        .dataEntry{
+            display: flex;
+            width: 500px;
+            
+        }
+
+        .formElement label:not(#genderInput) input{
+            display:  block;
+            box-sizing: border-box;
+            width: 100%;
+            height: 25px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+
+        .formElement label{
+            margin: 7px;
+        }
+      
+    </style>
+
+</head>
+<body>
+    <form method="get" name="form" action="">
+        <div class="dataEntry">
+            <div class="formElement">
+                <label> First name:
+                    <input type="text" name="FirstName">
+                </label>
+                <label>Birthday:
+                    <input type="date" name="Birthday">
+                </label>
+                <label>Country:
+                   <input type="text" name="Country">
+                </label>
+            </div>
+            <div class="formElement">
+                <label> Last name:
+                    <input type="text" name="LastName">
+                </label>
+                <label id="genderInput">Gender:
+                    <input type="radio" name="Gender" value="Male" checked><span>Male</span>
+                    <input type="radio" name="Gender" value="Female"><span>Female</span>
+                </label>
+                
+                <label>City:
+                   <input type="text" name="City">
+                </label>
+            </div>
+        </div>
+        <div class="skills">
+            <label> Skills: </label>
+            <input type="checkbox" name="HTML"><span>HTML</span>
+            <input type="checkbox" name="CSS"><span>CSS</span>
+            <input type="checkbox" name="JS"><span>JS</span>
+            <input type="checkbox" name="PHP"><span>PHP</span>
+            <input type="checkbox" name="C++"><span>C++</span>
+            <input type="checkbox" name="Java"><span>Java</span>
+            <input type="checkbox" name="C#"><span>C#</span>
+        </div>
+        <button onclick="printData(event)">Save</button>
+        
+    </form>
+    <div class="resTable"></div>
+
+    <script>
+
+        let headers = ['Firstname','Lastname','Birthday','Gen'];
+        tdStyle = "border: 1px solid black; padding: 5px";
+        function printData(e){
+            e.preventDefault();
+
+
+
+            let table = document.createElement("table");
+            table.style = "border-collapse: collapse";
+            let form = document.forms["form"];
+            form.nextElementSibling.innerHTML = "";
+            console.log( );
+           
+
+            CreateBasicInfo(form,table);
+            CreateGenderInfo(form,table);
+            CreateSkills(form,table);
+            
+           
+            let elem = document.getElementsByName("form")[0];
+            elem.nextElementSibling.appendChild(table);
+            
+        }
+
+        function CreateBasicInfo(form, table){
+            for(let i =0;i<7;i++){
+                if(i===4||i===5)
+                    continue;
+                let tr = document.createElement("tr");
+               
+                let tdHeader = document.createElement("td");
+                tdHeader.style = tdStyle;
+                let tdData = document.createElement("td");
+                tdData.style = tdStyle;
+                tdHeader.innerText = form.elements[i].name;
+                tdData.innerText = form.elements[i].value;
+                tr.appendChild(tdHeader);
+                tr.appendChild(tdData);
+                table.appendChild(tr);
+            }
+        }
+
+        function CreateGenderInfo(form, table){
+            let genderRow = document.createElement("tr");
+            let genderHeader = document.createElement("td");
+            genderHeader.innerText = form.elements[4].name;
+            genderHeader.style = tdStyle;
+            let genderData = document.createElement("td");
+            genderData.style = tdStyle;
+            genderData.innerText = form.elements[4].checked ? form.elements[4].value : form.elements[5].value;
+            genderRow.appendChild(genderHeader);
+            genderRow.appendChild(genderData);
+            table.appendChild(genderRow);
+        }
+
+        function CreateSkills(form,table){
+            let res = [];
+
+            let checkboxes = document.getElementsByClassName("skills")[0].children;
+            
+            for(let i = 0;i<checkboxes.length;i++){
+               
+                if(checkboxes[i].type=="checkbox"){
+                    if(checkboxes[i].checked)
+                        res.push(checkboxes[i].name);
+                }
+             
+            }
+            let SkillsRow = document.createElement("tr");
+            let SkillsHeader = document.createElement("td");
+            SkillsHeader.style = tdStyle;
+            let SkillsData = document.createElement("td");
+            SkillsData.style = tdStyle;
+            SkillsHeader.innerText = "Skills";
+            SkillsData.innerText = res;
+
+            SkillsRow.appendChild(SkillsHeader);
+            SkillsRow.appendChild(SkillsData);
+
+            table.appendChild(SkillsRow);
+        }
+    </script>
+
+</body>
+</html>

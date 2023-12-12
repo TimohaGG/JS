@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgb(255, 243, 228);
+            width: 300px;
+            padding: 20px;
+        }
+
+        label{
+            font-weight: bold;
+           
+            display: block;
+           
+        }
+
+        input{
+            display: block;
+            width: 300px;
+            height: 25px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        #rememberCheck input
+        {
+            display: inline;
+            width: 15px;
+            height: 15px;
+            vertical-align: middle;
+            
+        }
+
+        #rememberCheck{
+            align-self: baseline;
+        }
+        
+        form button{
+            width: 100%;
+        }
+
+        form a{
+            align-self: flex-end;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <form method="get" action="">
+        <label> Your login:
+            <input type="text" name="login">
+        </label>
+        <label> Your password:
+            <input type="text" name="password">
+        </label>
+        <label id="rememberCheck"> Remember me
+            <input type="checkbox" name="remember">
+        </label>
+        <button onclick="print(event)">Sign up</button>
+        <a href="#">Forgot password?</a>
+    </form>
+
+    <script>
+        function print(e){
+            e.preventDefault();
+            let form = document.forms[0];
+            if(form.elements["remember"].checked)
+                alert(`Привіт ${form.elements["login"].value}! Я тебе запам'ятав`);
+            else
+            alert(`Привіт ${form.elements["login"].value}! Я тебе не запам'ятав`);
+        }
+    </script>
+</body>
+</html>
