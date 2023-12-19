@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .infoEnter{
+            width: fit-content;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .infoEnter input{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <form action="get" name="nameForm">
+        <div class="infoEnter">
+            <p>Enter your name(without digits)</p>
+            <input type="text" name="userName" oninput="checkInput(this)">
+
+        </div>
+    </form>
+    <script>
+
+        function checkInput(input){
+            let inputValue = input.value;
+
+            let filteredValue = inputValue.replace(/\d/g, '');
+
+            input.value = filteredValue;
+        }
+    </script>
+</body>
+</html>

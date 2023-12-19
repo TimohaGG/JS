@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            height: 100vh;
+            background: url(images/field.png) no-repeat center;
+            background-size: cover;
+            position: relative;
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .ball{
+            display: block;
+            width: 100px;
+            height: 100px;
+            background:url(images/ball.png) no-repeat center;
+            background-size: cover;
+
+
+            position: absolute;
+            top:50px;
+            left:50px;
+
+            transform: translateX(-50%) translateY(-50%);
+
+            transition: all 2s linear;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="ball">
+
+    </div>
+    <span id="Xcoord" style="color: white;"></span>
+    <span id="Ycoord" style="color: white;"></span>
+    <script>
+        let body = document.body;
+
+        body.addEventListener("click",(event)=>moveBall(event));
+
+        let ball = document.querySelector(".ball");
+        function moveBall(event){
+            let x = event.x;
+            let y = event.y;
+
+           
+            x = x < 50 ? 50 : x;
+            y = y<50 ? 50 : y;
+
+
+            x = x > event.view.innerWidth-50 ? event.view.innerWidth - 50 : x;
+            y = y > event.view.innerHeight-50 ? event.view.innerHeight - 50 : y;
+
+            
+            ball.style.top = `${y}px`;
+            ball.style.left = `${x}px`;
+
+        }
+    </script>
+</body>
+</html>

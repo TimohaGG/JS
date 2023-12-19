@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .lightsSwitcher{
+            display: flex;
+        }
+        .lightsSwitcher button{
+            width: 200px;
+            border-radius: 40px;
+            margin-left: 40px;
+            border:1px solid lightgray;
+        }
+        .lightsSwitcher button:active{
+            background-color: lightgray;
+        }
+        .lights{
+            width: 420px;
+            height: 140px;
+            border: 2px solid lightgray;
+            border-radius: 20px;
+
+            display: flex;
+        }
+
+        .light{
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+            border-radius: 50%;
+            border: 1px solid lightgray;
+        }
+
+        .red{
+            background-color: red;
+        }
+
+        .yellow{
+            background-color: yellow;
+        }
+
+        .green{
+            background-color: green;
+        }
+
+        .inactive{
+            background-color: white;
+        }
+
+     
+    </style>
+</head>
+<body>
+    <div class="lightsSwitcher">
+        <div class="lights">
+            <div class="light red">
+    
+            </div>
+            <div class="light yellow inactive">
+    
+            </div>
+            <div class="light green inactive">
+    
+            </div>
+        </div>  
+        <button onclick="changeColors()">Next</button>
+    </div>
+    
+
+    <script>
+        function changeColors(){
+            let lights = document.querySelector(".lights");
+            let index = -1;
+            for(let i=0;i<lights.children.length;i++){
+                if(!lights.children[i].classList.contains("inactive")){
+                    index = i;
+                    lights.children[i].classList.add("inactive");
+                    break;
+                }     
+            }
+          
+            if(index+1 > 2)
+                index = 0;
+            else
+                index++;
+
+            lights.children[index].classList.remove("inactive");
+           
+        }
+    </script>
+</body>
+</html>
