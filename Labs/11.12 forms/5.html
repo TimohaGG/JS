@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+
+            margin: 0;
+            padding: 0;
+        }
+        .centerWrap{
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .addQuestionForm{
+           
+        }
+        .inputField {
+            display: flex;
+            margin: 10px;
+            margin-right: 0;
+        }
+        .inputField label{
+            min-width: 120px;
+        }
+
+        .inputField input{
+            width: 100%;
+        }
+
+        form input[type=submit]{
+            width: 100%;
+        }
+
+
+        .question p{
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .question p:first-child{
+            text-decoration: underline solid;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="centerWrap">
+        <div id="questionsList">
+            <h3>All questions:</h3>
+            <div class="question">
+                <p>1&rbbrk; 2+2 = </p>
+                <p>Correct answer: <span>4</span></p>
+                <p>Wrong answer: <span>3</span></p>
+                <hr>
+            </div>
+            
+        </div>
+      
+        <form method="get" name="questionInput" class="addQuestionForm">
+            <h3>Add new question</h3>
+            <div class="inputField">
+                <label>Question:</label>
+                <input type="text" name="question">
+            </div>
+            <div class="inputField">
+                <label>Correct answer:</label>
+                <input type="text" name="correctAns">
+            </div>
+            <div class="inputField">
+                <label>Qrong answer:</label>
+                <input type="text" name="wrongAns">
+            </div>
+            <input type="submit" name="submitNutton" value="Add">
+        </form>
+    </div>
+
+    <script>
+        let form = document.forms["questionInput"];
+        form.addEventListener("submit",()=>addQuestion(event));
+
+        function addQuestion(event){
+            event.preventDefault();
+
+            let allQuestion = document.getElementById("questionsList");
+            
+            let questionDiv = document.querySelector(".question").cloneNode(true);
+            questionDiv.children[0].innerText = `${allQuestion.children.length}) ${form.elements["question"].value}`;
+            questionDiv.children[1].innerText = form.elements["correctAns"].value;
+            questionDiv.children[2].innerText = form.elements["wrongAns"].value;
+           
+            allQuestion.append(questionDiv);
+            
+        }
+    </script>
+</body>
+</html>
