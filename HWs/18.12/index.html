@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="film-search">
+            <h4>Search</h4>
+            <form method="get" id="film-search-form" onsubmit="findFilms(event)">
+                <div>
+                    <label>Title:</label>
+                    <input type="text" name="filmTytle">
+                </div>
+                <div>
+                    <label>Type:</label>
+                    <select name="type" id="typeSelection" form="film-search-form">
+                        <option value="Movie">Movie</option>
+                        <option value="Series">Series</option>
+                        <option value="Episode">Episode</option>
+                    </select>
+                </div>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let req = new XMLHttpRequest();
+        
+        function findFilms(e){
+            e.preventDefault();
+            let form = document.getElementById("film-search-form");
+            let tytle = form.elements["filmTytle"].value;
+            req.open("GET",`http://www.omdbapi.com/?i=tt3896198&apikey=dd167fa&t=${tytle}`,false);
+            req.send();
+            let res = JSON.parse(req.response)
+            console.log(res);
+        }
+        
+    </script>
+</body>
+</html> 

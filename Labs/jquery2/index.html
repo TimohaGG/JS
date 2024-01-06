@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+
+        *{
+            margin: 0;
+        }
+
+        .wrap{
+            width: fit-content;
+            margin: 0 auto;
+        }
+        form[name="randStrForm"]{
+           
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            width: 400px;
+            background-color: darkgrey;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        form[name="randStrForm"] h2{
+            margin: 5px;
+        }
+        form[name="randStrForm"] .formElem{
+            margin: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            
+        }
+
+        form[name="randStrForm"] input[type="submit"]{
+            width: 100px;
+            border-radius: 5px;
+            height: 30px;
+        }
+
+        .resultWrap{
+            display: flex;
+           
+            flex-direction: column;
+            margin-top: 20px;
+            width: 440px;
+        }
+
+        .resultDiv{
+            display: flex;
+            padding: 20px;
+            justify-content: center;
+        }
+        .resultDiv input{
+            width: 100%;
+        }
+
+        .error{
+            color: red;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <form method="GET" name="randStrForm">
+            <h2>Random string generator</h2>
+            <div class="formElem">
+                <label>This should be
+                    <input type="number" name="symAmount" required> characters long
+                </label>
+            </div>
+            <div class="formElem">
+                <label>Which characters are allowed to occur in the string?</label>
+                <label>
+                    <input type="checkbox" name="nums"> Numeric digits(0-9)
+                </label>
+                <label>
+                    <input type="checkbox" name="upperLetters"> Uppercase letters (A-Z)
+                </label>
+                <label>
+                    <input type="checkbox" name="lowerLetters"> Lowercase letters(a-z)
+                </label>
+                <p class="error" id="symError">Choose at least one option!</p>
+            </div>
+            <div class="formElem"><input type="submit" value="Generate"></div>
+        </form>
+        <div class="resultWrap">
+            <hr>
+            <div class="resultDiv">
+                <h2>Result:</h2>
+                <input type="text" name="result" id="resultInput">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(".error").hide();
+        $(document).ready(
+            $("form").submit(
+                function(e){
+                    e.preventDefault();
+                    var form = $(this);
+                    generateStr(form);
+                    return false;
+                }
+            )          
+        );
+        
+        function generateStr(form){
+            var data = form.serializeArray();
+            if(data.length==1){
+                $("#symError").show();
+                return false;
+            }
+            else{
+                $("#symError").hide();
+            }
+            var availableSymbols = [];
+            
+            if(data.findIndex(el=>el.name=="nums")!=-1){
+                addLetters(48,57,availableSymbols)
+            }
+            if(data.findIndex(el=>el.name=="upperLetters")!=-1){
+                addLetters(65,90,availableSymbols)
+            }
+            if(data.findIndex(el=>el.name=="lowerLetters")!=-1){
+                addLetters(97,122,availableSymbols)
+            }
+           
+            let str = generateString(data[0].value,availableSymbols.reduce((x,y)=>{return x+y;}));
+            $("#resultInput").val(str);
+        }
+        function addLetters(min, max, resultArr){
+            for(let i = min;i<=max;i++){
+                resultArr.push(String.fromCharCode(i));
+            }
+        }
+
+        function generateString(length, characters) {
+            let result = ' ';
+            const charactersLength = characters.length;
+            for ( let i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+
+            return result;
+        }
+    </script>
+</body>
+</html>

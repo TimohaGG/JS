@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        body{
+            margin: 0;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        form label{
+            display: grid;
+            margin-bottom: 10px;
+            font-weight: bold;
+            width: 200px
+        }
+
+       
+
+        #userInfoForm{
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: rgb(255, 237, 216);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        #userInfoForm h3{
+            text-align: center;
+            margin:0px;
+            
+        }
+
+        #userInfoForm input[type=submit]{
+            width: 100%;
+        }
+
+        .greeting{
+            display: flex;
+            align-items: center;
+            justify-content: end;
+           height:20px;
+        }
+     
+
+        .wrap{
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 15px;
+        }
+
+        .labelText{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .error{
+            color: red;
+            font-size: 10px;
+            align-self: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+   
+    
+   
+    <form method="get" id="userInfoForm" onsubmit="checkData(event)">
+        <div class="greeting">
+            <p>Hello <span id="userName"></span>!</p>
+            <button onclick="deleteCookies(event)">exit</button>
+        </div>
+        <hr>
+        <h3>User info</h3>
+        <div class="wrap">
+            <div class="col-1">
+                <label>
+                    <div class="labelText">
+                        <span>First Name:</span>
+                        <span class="error" id="nameError">Wrong name!</span>
+                    </div>
+                    <input type="text" name="firstNameInp" required>
+                </label>
+                <label>
+            
+                    <div class="labelText">
+                        <span>Year of birth:</span>
+                        <span class="error" id="dateError">Wrong date!</span>
+                    </div>
+                    <input type="number" name="birthInp" required>
+                </label>
+                <label>
+                    <div class="labelText">
+                        <span> Phone number:</span>
+                        <span class="error" id="phoneError">Wrong number!</span>
+                    </div>
+                    <input type="tel" name="phoneInp" >
+                </label>
+            </div>
+            <div class="col-1">
+                <label>
+                    <div class="labelText">
+                        <span>Last Name:</span>
+                        <span class="error" id="lastNameError">Wrong surname!</span>
+                    </div>
+                    <input type="text" name="lastNameInp" required>
+                </label>
+                <label>
+            
+                    <div class="labelText">
+                        <span>Gender:</span>
+                    </div>
+                    <select name="genderInp">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="avocado">Avocado</option>
+                    </select>
+                </label>
+                <label>
+                    <div class="labelText">
+                        <span> Skype:</span>
+                        <span class="error" id="skypeError">Wrong skype!</span>
+                    </div>
+                    <input type="text" name="skypeInp">
+                </label>
+            </div>
+        </div>
+        <input type="submit" name="subButton" value="Save">
+    </form>
+
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded",()=>{
+            let cookies = document.cookie;
+            let cookiesObj = {};
+
+            for(let el of cookies.split('; ')){
+                let obj = el.split('=');
+                cookiesObj[obj[0]] = obj[1];
+            }
+           
+            showName(cookiesObj);
+            pasteData(cookiesObj);
+        });
+
+
+        function showName(cookiesObj){
+            let name = document.getElementById("userName");
+            name.append(cookiesObj["username"]);
+        }
+
+        function pasteData(cookiesObj){
+
+            let form = document.forms["userInfoForm"];
+            for(let el of form.elements){
+                //form.elements[el].value = cookiesObj[el];
+                //form.elements[cookiesObj[el.name]].value = cookiesObj[el.name];
+                if(el.name!='' && el.type!='submit'){
+                    console.log(el.name);
+                    if(cookiesObj[el.name]!=undefined &&cookiesObj[el.name]!='')
+                        form.elements[el.name].value = cookiesObj[el.name];
+                }
+                   
+
+                
+            }
+        }
+
+        function deleteCookies(event){
+            event.preventDefault();
+
+            let date = new Date();
+            date = +date - 1000*60;
+            document.cookie = `username=1;expires = ${new Date(date).toGMTString()}`;
+            document.cookie = `pass=1;expires = ${new Date(date).toGMTString()}`;
+            document.location = "1.html";
+        }
+
+
+        let canSave = false;
+
+        function checkData(event){
+            event.preventDefault();
+            let form = event.target;
+
+            
+            let nameReg = /^[a-zA-Z]{1,20}$/;
+            let phoneReg = /^[0-9\s()-]{10,12}$/;
+            let skypeReg = /^([a-zA-Z0-9.-]*)$/;
+            isValidData(form.elements["firstNameInp"].value,nameReg,"nameError");
+            isValidData(form.elements["lastNameInp"].value,nameReg,"lastNameError");
+            isValidData(form.elements["phoneInp"].value,phoneReg,"phoneError");
+            isValidData(form.elements["skypeInp"].value,skypeReg,"skypeError");
+            isValidYear(form.elements["birthInp"].value);
+            
+            if(canSave)
+                saveCookies(form);
+        }
+
+
+
+        function isValidData(data,regex,errorId){
+            
+            if(regex.test(data)){
+                canSave = true;
+                document.getElementById(errorId).style = "display:none";
+            }
+            else{
+                canSave = false;
+                document.getElementById(errorId).style = "display:block";
+            }
+        }
+
+        function isValidYear(year){
+            if(year>=1900 && year <= new Date().getFullYear()){
+                canSave = true;
+                document.getElementById("dateError").style = "display:none";
+            }
+            else{
+                canSave = false;
+                document.getElementById("dateError").style = "display:block";
+            }
+
+        }
+
+        function saveCookies(form){
+
+            let date = new Date();
+            date = +date + 1000*60*60;
+            for(let el of form.elements){
+                if(el.name!="subButton"){
+                    let str = `${el.name}=${el.value};expires=${new Date(date).toGMTString()}`;
+                    document.cookie = str;
+                }
+                
+            }
+        }
+    </script>
+</body>
+</html>

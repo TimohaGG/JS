@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            font-style: ;
+        }
+
+        #textResult,#textForm{
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        #textForm{
+            display: flex;
+            flex-direction: column;
+           
+        }
+
+        .controls{
+            display: flex;
+            align-self: center;
+            margin: 10px;
+           
+        }
+
+        #textForm textarea{
+            text-align: center;
+            max-width: 1000px;
+        }
+
+        #textForm input[type=submit]{
+            margin-top: 10px;
+            height: 30px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <form method="get" name="textForm" id="textForm" onsubmit="submitForm(event)">
+        <div class="controls">
+            <label> <input type="checkbox">Bold</label>
+            <label> <input type="checkbox">Underline</label>
+            <label> <input type="checkbox">Italic</label>
+            <label> <input type="radio" name="alignment">Left</label>
+            <label> <input type="radio" name="alignment">Right</label>
+            <label> <input type="radio" name="alignment">Justify</label>
+        </div>
+        <textarea type="text" rows="10" name="textBox" form="textForm" autofocus>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ipsum aut iusto eius ratione non, labore ducimus asperiores nam saepe cupiditate consequatur deserunt voluptatem minima assumenda quam, id vitae beatae exercitationem vero dignissimos magnam! Aliquam nesciunt eveniet reiciendis, a veniam officia temporibus quisquam quos mollitia culpa explicabo, voluptatum voluptates. Sunt doloremque id veritatis excepturi aliquam fuga fugit similique pariatur ex repellendus soluta praesentium magnam, suscipit ducimus quasi, quo asperiores sequi maiores iste dolor quos. Quasi rem iste nemo omnis, fugit animi, odio aliquid distinctio natus, eius eaque dicta dolore quas suscipit assumenda praesentium similique culpa sunt nostrum cum veniam cupiditate?
+        </textarea>
+        <input type="submit" name="subButton" value="Print">
+    </form>
+    <div id="textResult">
+        
+    </div>
+
+    <script>
+        let form = document.forms["textForm"];
+        let resultDiv = document.getElementById("textResult");
+
+        function submitForm(event){
+            event.preventDefault();
+            resultDiv.innerText = form.elements[6].value;
+            console.log(form.elements[0].labels);
+            resultDiv.style.setProperty(`font-weight`,form.elements[0].checked ? form.elements[0].labels[0].textContent : "");
+            resultDiv.style.setProperty("text-decoration",form.elements[1].checked ? form.elements[1].labels[0].textContent : "");
+            resultDiv.style.setProperty("font-style",form.elements[2].checked ? form.elements[2].labels[0].textContent : "");
+            resultDiv.style.setProperty("text-align",document.querySelector('input[name="alignment"]:checked').labels[0].textContent);
+            document.querySelector('input[name="alignment"]:checked').labels[0].textContent;
+            
+
+
+        }
+    </script>
+</body>
+</html>

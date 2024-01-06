@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+
+            margin: 0;
+            padding: 0;
+        }
+        .centerWrap{
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+       
+        .inputField {
+            display: flex;
+            margin: 10px;
+            margin-right: 0;
+        }
+        .inputField label{
+            min-width: 120px;
+        }
+
+        .inputField input{
+            width: 100%;
+        }
+
+        form input[type=submit]{
+            width: 100%;
+        }
+
+
+        .comment{
+            margin: 10px;
+            border: 2px solid black;
+        }
+
+    
+        .commentHeader{
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid black;
+            padding: 10px;
+        }
+
+        .commentText{
+            padding: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="centerWrap">
+        <div id="commentsList">
+            
+            <div class="comment">
+                <div class="commentHeader">
+                    <span>Name</span>
+                    <span>10:05:05 22.02.3021</span>
+                </div>
+                <div class="commentText">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae ab eos aliquam modi a suscipit accusamus veritatis nihil id consectetur fugit quis, labore ipsam vero esse aliquid architecto debitis laborum blanditiis excepturi voluptas illum? Quia repudiandae quaerat rerum dolor fuga mollitia minus a et id officiis, aperiam quidem! Laboriosam facere velit autem sequi iure adipisci quaerat impedit tenetur obcaecati, necessitatibus dolor est modi nisi odio quibusdam eligendi natus et ut sapiente mollitia saepe! Est, tempora neque maiores doloremque dicta dolorum dolorem ad officiis, pariatur explicabo ipsa aliquid deserunt expedita! Aliquid cumque architecto laborum ducimus officia labore nam, obcaecati similique enim.
+                </div>
+            </div>
+            
+        </div>
+      
+        <form method="get" name="commentInput" class="addCommentForm">
+            <h3>Add new message</h3>
+            <div class="inputField">
+                <label>Name:</label>
+                <input type="text" name="name">
+            </div>
+            <div class="inputField">
+                <label>Message:</label>
+                <input type="text" name="comment">
+            </div>
+            <input type="submit" name="submitButton" value="Add">
+        </form>
+    </div>
+
+    <script>
+        let form = document.forms["commentInput"];
+        form.addEventListener("submit",()=>addQuestion(event));
+
+        function addQuestion(event){
+            event.preventDefault();
+
+            let allQuestion = document.getElementById("commentsList");
+            
+            let questionDiv = document.querySelector(".comment").cloneNode(true);
+            questionDiv.children[0].innerText = form.elements["name"].value;
+            questionDiv.children[1].innerText = form.elements["comment"].value;
+           
+            allQuestion.append(questionDiv);
+            
+        }
+    </script>
+</body>
+</html>

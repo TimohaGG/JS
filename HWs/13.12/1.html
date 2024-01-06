@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        body{
+            margin: 0;
+        }
+        form label{
+            display: grid;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        #regForm{
+            max-width: 300px;
+            margin: 0 auto;
+            background-color: rgb(255, 237, 216);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        #regForm h3{
+            text-align: center;
+        }
+
+        #regForm input[type=submit]{
+            width: 100%;
+        }
+
+        .labelText{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .labelText .error{
+            display: none;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form method="get" id="regForm" onsubmit="checkData(event)">
+        <h3>Registration</h3>
+        <label>
+            <div class="labelText">
+                <span>Email:</span>
+                <span class="error" id="emailError">Wrong email address!</span>
+            </div>
+            <input type="email" name="emailInp" required>
+        </label>
+
+        <label>
+           
+            <div class="labelText">
+                <span>Password:</span>
+                <span class="error" id="passError">Wrong password!</span>
+            </div>
+            <input type="password" name="passInp" required >
+        </label>
+
+        <label>
+            <div class="labelText">
+                <span> Repeat:</span>
+                <span class="error" id="passRepeatError">Passwords must match!</span>
+            </div>
+            <input type="password" name="passRepeat" required >
+        </label>
+
+        <input type="submit" name="subButton" value="Sign up">
+    </form>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded",()=>{
+            let cookiesExist = document.cookie.search("username");
+            if(cookiesExist==0)
+                document.location = "2.html";
+        })
+
+        let res = true;
+        function checkData(e){
+            e.preventDefault();
+            
+            let form = e.target;
+            emailCheck(form);
+            passCheck(form);
+            repeatPassCheck(form);
+                
+
+            setCookies(form);
+           
+            if(res)
+                document.location = "2.html";
+        }
+
+        function emailCheck(form){
+            let regEmail = /^[a-zA-Z.\-_]{3,}@([a-zA-Z]+\.)+[a-zA-Z]{2,}$/;
+            if(!regEmail.test(form.elements["emailInp"].value)){
+                res = false;
+                document.getElementById("emailError").style = "display:block";
+            }
+            else{
+                res = true;
+                document.getElementById("emailError").style = "display:none";
+            }
+        }
+
+        function passCheck(form){
+            let el = document.getElementById("passError");
+            let regPass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+            if(!regPass.test(form.elements["passInp"].value)){
+                el.style = "display:block";
+                res = false;
+            } 
+            else{
+                res = true;
+                el.style = "display:none";
+            }
+               
+        }
+
+        function repeatPassCheck(form){
+
+            let el = document.getElementById("passRepeatError");
+            if(form.elements["passInp"].value !== form.elements["passRepeat"].value){
+                res = false;
+                el.style = "display:block";
+            }
+            else{
+                res = true;
+                el.style = "display:none";
+            }
+
+            
+
+        }
+
+        function setCookies(form){
+
+            let expDate = new Date();
+            expDate = +expDate + 1000*60*2;
+
+            let userName = `username = ${form.elements["emailInp"].value};expires=${new Date(expDate).toGMTString()}`;
+            let pass = `pass = ${form.elements["passInp"].value};expires=${new Date(expDate).toGMTString()}`;
+            document.cookie = userName;
+            document.cookie = pass;
+        }
+    </script>
+</body>
+</html>

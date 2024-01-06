@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        width: 1000px;
+        margin: 0 auto;
+      }
+
+      .wrap {
+        width: 1000px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      #usersList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      #usersList div {
+        width: 150px;
+        margin: 10px;
+        cursor: pointer;
+      }
+
+      .userContainer {
+        width: 200px;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid black;
+      }
+
+      .userTable {
+        border-collapse: collapse;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .userTable td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: left;
+      }
+
+      .userTable td:first-child {
+        width: 20%;
+      }
+
+      .userTable td:last-child {
+        width: 80%;
+      }
+
+      #posts{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+      }
+
+      .post{
+        display: block;
+        flex-basis: 250px;
+        border:1px solid black;
+        padding: 20px;
+        margin: 20px;
+      }
+
+      .post h5{
+        margin: 0;
+      }
+
+      .post p{
+        text-align:justify;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h4>All users:</h4>
+      <div id="usersList"></div>
+
+      <div id="userInfo" style="display: none;">
+        <h4>User info:</h4>
+        <div id="tableData"></div>
+      </div>
+
+      <div id="userPosts" style="display: none;">
+        <h4>User posts:</h4>
+        <div id="posts">
+          
+          
+        </div>
+        
+      </div>
+    </div>
+    <script>
+      let req = new XMLHttpRequest();
+
+      req.open("GET", "https://jsonplaceholder.typicode.com/users", false);
+      req.send();
+
+      let users = JSON.parse(req.responseText);
+      console.log(users);
+      let parentDiv = document.getElementById("usersList");
+      let divs = users.map((user) => {
+        let div = document.createElement("div");
+        div.classList.add("userContainer");
+        div.append(user.name);
+        div.addEventListener("click", () => {
+          openUser(user.id);
+        });
+        parentDiv.append(div);
+      });
+
+      function openUser(id) {
+        req.open(
+          "GET",
+          `https://jsonplaceholder.typicode.com/users/${id}`,
+          false
+        );
+        req.send();
+
+        document.getElementById("userInfo").style.display = "block";
+        document.getElementById("userPosts").style.display = "none";
+        let parent = document.getElementById("tableData");
+        let user = JSON.parse(req.response);
+        let keys = Object.keys(user);
+        let table = document.createElement("table");
+        table.classList.add("userTable");
+        for (let i = 1; i < 7; i++) {
+          let tr = document.createElement("tr");
+          let tdName = document.createElement("td");
+          let tdValue = document.createElement("td");
+          tdName.append(keys[i]);
+          if (keys[i] == "address") {
+            tdValue.append(user[keys[i]]["city"] + ", ");
+            tdValue.append(user[keys[i]]["street"]);
+          } else tdValue.append(user[keys[i]]);
+          tr.append(tdName);
+          tr.append(tdValue);
+          table.append(tr);
+        }
+        parent.innerHTML = table.outerHTML;
+        let showPostsButton = document.createElement("button");
+        showPostsButton.innerText = "Show posts";
+        showPostsButton.style = "width:100%; padding:10px;margin-top:10px";
+        showPostsButton.onclick = ()=>showPosts(id);
+        parent.append(showPostsButton);
+      }
+
+      function showPosts(userID) {
+        req.open(
+          "GET",
+          `https://jsonplaceholder.typicode.com/posts?userId=${userID}`,
+          false
+        );
+        req.send();
+        document.getElementById("userPosts").style.display = "block";
+        let posts = JSON.parse(req.response);
+
+        for(let el of posts){
+            createPost(el["title"],el["body"]);
+        }
+
+      }
+      function createPost(title, text){
+        let parent = document.getElementById("posts");
+        let div =document.createElement("div");
+        div.classList.add("post");
+
+        let h5 = document.createElement("h5");
+        h5.append(title);
+
+        let p = document.createElement("p");
+        p.append(text);
+
+        div.append(h5);
+        div.append(p);
+        parent.append(div);
+      }
+    </script>
+  </body>
+</html>

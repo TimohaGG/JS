@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap{
+            display: flex;
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .bookCover{
+            min-width: 150px;
+            max-width: 150px;
+            
+            display: flex;
+            flex-direction: column;
+            flex-flow: column;
+            
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .bookCover input{
+            margin-top: auto;
+        }
+
+        .book .image{
+            width: 150px;
+            height: 200px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size:contain;
+           
+        }
+
+        .bookInfo{
+            display: flex;
+            justify-content: space-between;
+            
+        }
+    
+        .bookName{
+            word-wrap: break-word;
+        }
+        
+        .booksList{
+            display: flex;
+            align-self:baseline;
+            flex-wrap: wrap;
+        }
+
+        .booksList form{
+            margin: 10px;
+        }
+
+        #userInfo{
+            border: 1px solid black;
+            margin: 10px;
+            align-self: center;
+            
+        }
+
+        #userInfo div{
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        #userInfo div label{
+            width: 100px;
+            display: inline-block;
+           
+        }
+        #userInfo div>*{
+            box-sizing: border-box;
+            width: 200px;
+            margin-left: 30px;
+        }
+
+        #userInfo div textarea{
+            height: 50px;
+            max-width: 200px;
+            max-height: 100px;
+        }
+
+        #userInfo input[type=submit]{
+            margin: 10px;
+            width: 100%;
+            
+            
+            box-sizing:border-box;
+        }
+     
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="booksList">
+            <form method="GET" class="bookCover" onsubmit="return false;">
+                <div class="book">
+                    <div class="image" style="background-image: url(images/dune.jpg);"></div>
+                    <strong class="bookName">Dune</strong>
+                    <div class="bookInfo">
+                        <span class="author">B.W. Frankus</span>
+                        <span class="price">20$</span>
+                    </div>
+                </div>
+                <input type="submit" name="subButton" value="Выбрать" onclick="selectBook(event)">
+            </form>
+           
+            <form method="GET" class="bookCover" onsubmit="return false;">
+                <div class="book">
+                    <div class="image" style="background-image: url(images/harryPotter.jpg);"></div>
+                    <strong class="bookName">Harry Potter and the philosopher's stone</strong>
+                    <div class="bookInfo">
+                        <span class="author">J.K. Rowling</span>
+                        <span class="price">20$</span>
+                    </div>
+                </div>
+                <input type="submit" name="subButton"  value="Выбрать" onclick="selectBook(event)">
+            </form>
+            <form method="GET" class="bookCover" onsubmit="return false;">
+                <div class="book">
+                    <div class="image" style="background-image: url(images/lastHope.jpg);"></div>
+                    <strong class="bookName">The last hope</strong>
+                    <div class="bookInfo">
+                        <span class="author">R.L. Bishop</span>
+                        <span class="price">20$</span>
+                    </div>
+                </div>
+                <input type="submit" name="subButton"  value="Выбрать" onclick="selectBook(event)">
+            </form>
+        </div>
+        <form method="GET" onsubmit="buyBook(event)" name="userInfo" id="userInfo">
+            <div>
+                <label for="bookName">Book: </label>
+                <input type="text" disabled id="bookName" name="bookName">
+            </div>
+            <div>
+                <label for="quantity">Quantity: </label>
+                <input type="text" name="quantity" id="quantity" required>
+            </div>
+            <div>
+                <label for="name">Name: </label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div>
+                <label for="deliveryAddress">Delivery address</label>
+                <textarea form="userInfo" id="deliveryAddress" required></textarea>
+            </div>
+            <div>
+                <label for="deliveryDate">Delivery date: </label>
+                <input type="date" name="deliveryDate" id="deliveryDate" required>
+            </div>
+            <div>
+                <label for="comment">Comment</label>
+                <textarea form="userInfo" id="comment" required></textarea>
+            </div>
+            <div><input type="submit" id="submitButton" value="Buy" ></div>
+            
+        </form>
+
+        
+    </div>
+
+    
+    <script>
+        let bookNameField  =document.getElementById("bookName");
+        function selectBook(e){
+            let form = e.target.form;
+            let tytle = form.children[0].children[1].innerText;
+            bookNameField.value = tytle;
+        }
+
+        function buyBook(e){
+            e.preventDefault();
+            let form = document.getElementById("userInfo");
+            console.log(form.elements[1]);
+            if(!/^\d+$/.test(form.elements[1].value)){
+                alert("Error. Amount should be number");
+            }
+            printRes(form);
+        }
+
+        function printRes(form){
+            let div = document.createElement("div");
+            div.style.setProperty("margin","10px");
+            div.style.setProperty("width","1000px");
+            div.style.setProperty("margin","0 auto");
+            div.style.setProperty("border","2px solid black");
+            div.style.setProperty("padding","10px");
+            let headerSpan = document.createElement("strong");
+            headerSpan.append("Result:");
+
+            let textDiv = document.createElement("div");
+            let thankP = document.createElement("p");
+            thankP.append(`${form.elements[2].value}, thanks for the order!`)
+            textDiv.append(thankP);
+
+            let infoP = document.createElement("p");
+            infoP.append(`Book ${form.elements[0].value}will be delivered on ${form.elements[4].value} to ${form.elements[3].value}`);
+            textDiv.append(infoP);
+            
+            div.append(headerSpan);
+            div.append(textDiv);
+
+            document.body.append(div);
+            console.log(div);
+        }
+    </script>
+</body>
+</html>
+
+<!-- все зрозуміло, далі завдання схожі -->

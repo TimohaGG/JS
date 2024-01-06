@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.wrap{
+    width: 1000px;
+    margin: 0 auto;
+   
+}
+
+.film-search{
+    width: 250px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.film-search h4{
+    margin: 10px;
+}
+
+#film-search-form{
+    display:  flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#film-search-form div{
+    display:  flex;
+    margin: 10px;
+}
+
+
+#film-search-form div input,
+#film-search-form div select{
+    width: 150px;
+    margin-left: auto;
+   box-sizing: border-box;
+}

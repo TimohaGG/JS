@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=EB Garamond"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+      
+       @media screen and (max-width:850px){
+            .story,
+            .story:not(.greeting):nth-child(2n-1),
+            .story:not(.greeting):nth-child(2n)
+            {
+                grid-template-columns: 50% 50%;
+            }
+           
+
+            .story .image{
+                height: 23em;
+            }
+
+            .story .text{
+                padding: 20px;
+            }
+
+            #social-networks{
+                display: none;
+            }
+
+            .gallery-images>div:nth-child(3),
+            .gallery-images>div:nth-child(4){
+                display: none;
+            }
+
+            .features-list{
+                grid-template-columns: repeat(2,auto);
+                
+            }
+
+
+       }
+
+       @media screen and (max-width:600px) {
+            .container{
+                position: relative;
+            }
+            #menu ul{
+                display: none;
+                position: absolute;
+                top:0;
+                right:0;
+                background-color: white;
+                height: 100%;
+                text-align: center;
+            }
+
+            #menu li:first-child{
+                margin: 0;
+            }
+
+            #menu li{
+                padding: 10px;
+            }
+
+          #menu li:first-child{
+            display: block;
+            cursor: pointer;
+          }
+
+           .menu-opener{
+                display: block;
+                margin-right: 40px;
+           }
+           header{
+                justify-content: space-between;
+           }
+           
+           .greeting,
+           .story{
+            grid-template-areas: "img img"
+                        "text text";
+           }
+
+           .story .image{
+            grid-area: img;
+           }
+           .story .text{
+            grid-area: text;
+            padding: 50px;
+           }
+
+
+         .gallery-images div:nth-child(2){
+            display: none;
+         }
+
+         .gallery-images div:first-child{
+            width: 100%;
+         }
+
+         .features-list{
+            grid-template-columns: repeat(1,100%);
+         }
+
+         .feature{
+            width: 100vw;
+         }
+         .gallery-images{
+            width: fit-content;
+         }
+         .gallery-images>div>img{
+            width: fit-content;
+         }
+
+       
+       }
+       
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <nav id="menu">
+            <div class="logo"><a href="#">tour-guide</a></div>
+          <ul>
+            <li class="close-button">&Cross;</li>
+            <li><a href="#">Stories</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Write to us</a></li>
+          </ul>
+         
+        </nav>
+        <div class="menu-opener" onclick="expandMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        <nav id="social-networks">
+          <ul>
+            <li>
+              <a href="#"><img src="img/logos/twitter-128.png" alt="twiter" /></a>
+            </li>
+            <li>
+              <a href="#"><img src="img/logos/facebook-128.png" alt="facebook" /></a>
+            </li>
+            <li>
+              <a href="#"><img src="img/logos/instagram-2-128.png" alt="instagram" /></a>
+            </li>
+            <li>
+              <a href="#"><img src="img/logos/youtube-128.png" alt="youtube" /></a>
+            </li>
+            <li>
+              <a href="#"><img src="img/logos/gmail-128.png" alt="gmail" /></a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <section class="greeting story">
+            <div class="text">
+                <h1>Let`s hit the road</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore blanditiis accusantium ipsa explicabo qui iste recusandae velit. Minus sapiente atque fuga dolorem corrupti sed quisquam, cumque consequatur neque iure qui?</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic consectetur iure blanditiis, quam quod laboriosam.</p>
+                <div class="button">Start</div>
+            </div>
+            <div class="image" style="background-image: url(img/pictures/fire.jpg);"></div>
+           
+        </section>
+        <section class="story reversed">
+            
+            <div class="image" style="background-image: url(img/pictures/camp.jpg);"></div>
+            <div class="text">
+                <h1>Story</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore blanditiis accusantium ipsa explicabo qui iste recusandae velit. Minus sapiente atque fuga dolorem corrupti sed quisquam, cumque consequatur neque iure qui?</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic consectetur iure blanditiis, quam quod laboriosam.</p>
+                <div class="button">Start</div>
+            </div>
+        </section>
+        <section class="story">
+            <div class="text">
+                <h1>Story</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore blanditiis accusantium ipsa explicabo qui iste recusandae velit. Minus sapiente atque fuga dolorem corrupti sed quisquam, cumque consequatur neque iure qui?</p>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic consectetur iure blanditiis, quam quod laboriosam.</p>
+                <div class="button">Start</div>
+            </div>
+            <div class="image" style="background-image: url(img/pictures/tents.jpg);"></div>
+        </section>
+        <section class="gallery">
+            <h2>Gallery</h2>
+            <div class="gallery-images">
+                <div class="img-wrap">
+                    <img src="img/pictures/camping-1289930_1280.jpg" alt="camping">
+                    <div class="img-info">
+                        <h3>Title</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, ratione.
+                        </p>
+                        <div class="button">MORE</div>
+                    </div>
+                </div>
+                <div class="img-wrap">
+                    <img src="img/pictures/fire-1873169_1280.jpg" alt="fire">
+                    <div class="img-info">
+                        <h3>Title</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, ratione.
+                        </p>
+                        <div class="button">MORE</div>
+                    </div>
+                </div>
+
+                <div class="img-wrap">
+                    <img src="img/pictures/fireplace-1598243_1280.jpg" alt="fireplace">
+                    <div class="img-info">
+                        <h3>Title</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, ratione.
+                        </p>
+                        <div class="button">MORE</div>
+                    </div>
+                </div>
+                <div class="img-wrap">
+                    <img src="img/pictures/people-2591928_1280.jpg" alt="people">
+                    <div class="img-info">
+                        <h3>Title</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, ratione.
+                        </p>
+                        <div class="button">MORE</div>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+        </section>
+        <section class="features">
+            <h2>Features</h2>
+            <div class="features-list">
+                <div class="feature">
+                    <img src="img/logos/airplane-48.png" alt="airplane">
+                    <h4>One</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, aliquam!</p>
+                </div>
+                <div class="feature">
+                    <img src="img/logos/map_marker-48.png" alt="map">
+                    <h4>Two</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, aliquam!</p>
+                </div>
+                <div class="feature">
+                    <img src="img/logos/movie-48.png" alt="movie">
+                    <h4>Three</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, aliquam!</p>
+                </div>
+                <div class="feature">
+                    <img src="img/logos/alarm_clock-48.png" alt="clock">
+                    <h4>Four</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, aliquam!</p>
+                </div>
+                <div class="feature">
+                    <img src="img/logos/face-48.png" alt="face">
+                    <h4>Five</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, aliquam!</p>
+                </div>
+                <div class="feature">
+                    <img src="img/logos/genius-48.png" alt="genius">
+                    <h4>Six</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, aliquam!</p>
+                </div>
+            </div>
+        </section>
+        <!-- <section class="write-form">
+            <h2>Write to us</h2>
+            <div class="contant-form">
+                <form method="get" onsubmit="{return false;}" id="contactForm">
+                    <div class="user-info-select">
+                        <div class="text-info">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" id="name">
+                        </div>
+                        <div class="text-info">
+                            <label for="email">Email:</label>
+                            <input type="email" name="email" id="email">
+                        </div>
+                        <div class="text-info">
+                            <label for="tel">Phone:</label>
+                            <input type="tel" name="tel" id="tel">
+                        </div>
+                    </div>
+
+                    <div class="contact-method-select">
+                        <label>Contact me via:</label>
+                        <label>
+                            <input type="radio" value="Email" name="contactMethod" id="email">
+                            Email
+                        </label>
+                        <label>
+                            <input type="radio" value="Phone" name="contactMethod" id="phone">
+                            Phone
+                        </label>
+                        <label>
+                            <input type="radio" value="Telegram" name="contactMethod" id="telegram">
+                            Telegram
+                        </label>
+                    </div>
+
+                    <div class="topic-select text-info">
+                        <label for="topic">Topic</label>
+                        <select name="topic" id="topic">
+                            <option value="Post my story">Post my story</option>
+                            <option value="Complain">Complain</option>
+                            <option value="Contact administration">Contact administration</option>
+                        </select>
+                    </div>
+
+                    <div class="message-select text-info">
+                        <label for="message">Message:</label>
+                        <textarea name="message" id="message" cols="30" rows="10" form="contactForm"></textarea>
+                    </div>
+
+                    <div class="send-wrap">
+                        <div class="human-verif">
+                            <input type="checkbox" name="isHuman" id="isHuman">
+                            <label for="isHuman">I am a human</label>
+                        </div>
+                        <input type="submit" class="button" value="Send">
+                    </div>
+                </form>
+            </div>
+        </section> -->
+       
+      </main>
+      <footer>
+            <nav id="social-networks-footer">
+                <ul>
+                    <li>
+                        <a href="#"><img src="img/logos/twitter-128.png" alt="twiter" /></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="img/logos/facebook-128.png" alt="facebook" /></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="img/logos/instagram-2-128.png" alt="instagram" /></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="img/logos/youtube-128.png" alt="youtube" /></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="img/logos/gmail-128.png" alt="gmail" /></a>
+                    </li>
+                </ul>
+            </nav>
+            <span>&copy;UNTITLED 2023</span>
+        </footer>
+    </div>
+
+    <script>
+        function expandMenu(){
+            let menu = document.getElementById("menu").children[1];
+            menu.style = "display:block";
+            menu.children[0].onclick = ()=>{menu.style = "display:none";};
+        }
+    </script>
+  </body>
+</html>
